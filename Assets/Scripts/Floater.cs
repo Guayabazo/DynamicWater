@@ -142,6 +142,8 @@ public class Floater : MonoBehaviour
 
     }
 
+
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -175,4 +177,5 @@ public class Floater : MonoBehaviour
             Gizmos.DrawRay(new Vector3(Center.x, WaterLine, Center.z), TargetUp * 0.1f);
         }
     }
+    */
 }

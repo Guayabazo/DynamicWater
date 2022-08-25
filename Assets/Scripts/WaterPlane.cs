@@ -340,7 +340,20 @@ public class WaterPlane : MonoBehaviour
 
 
         }
-        
+
+        if (p2.x > 0 && p2.x < dimension && p2.z > 0 && p2.z < dimension)
+        {
+            velocities[Index((int)p2.x, (int)p2.z)] += force;
+        }
+        if (p3.x > 0 && p3.x < dimension && p3.z > 0 && p3.z < dimension)
+        {
+            velocities[Index((int)p3.x, (int)p3.z)] += force;
+        }
+        if (p4.x > 0 && p4.x < dimension && p4.z > 0 && p4.z < dimension)
+        {
+            velocities[Index((int)p4.x, (int)p4.z)] += force;
+        }
+
     }
 
 
