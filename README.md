@@ -1,6 +1,6 @@
 # DynamicWater
 Dynamic water with ripples and waves.
-![image](https://user-images.githubusercontent.com/108235025/186692024-d3e4431c-0734-4cbc-b3ed-f4fb3c00a5af.png)
+
 
 
 
