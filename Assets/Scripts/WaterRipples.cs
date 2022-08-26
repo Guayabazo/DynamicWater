@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class WaterRipples : MonoBehaviour
 {
-    protected WaterPlane waves;
-
-
-    public bool done;
+    private WaterPlane waves;    
     private bool inOut;
     private bool pointUnderWater;
     public float distanceToSurface = 1f;
-    //water line
-    protected float WaterLine;
-    protected Vector3 WaterLinePoint;
+        
+    private Vector3 WaterLinePoint;
 
     private Vector3 lastPos = Vector3.zero;
 
-
-
     public float force = 0.1f;
     public float maxForce = 0.2f;
-
-
-    private float contador;
+    
     private Vector3 lastPoint;
 
 
@@ -37,30 +29,23 @@ public class WaterRipples : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         Vector3 pos = transform.position;
         float speed = (pos - lastPos).magnitude;
-        contador += Time.deltaTime;
-        var newWaterLine = 0f;
-
-        inOut = pointUnderWater;
-
+ 
         WaterLinePoint = transform.position;
-        WaterLinePoint.y = waves.GetHeight(transform.position);
-        newWaterLine += WaterLinePoint.y;
+        WaterLinePoint.y = waves.GetHeight(transform.position);   
+        
         if (WaterLinePoint.y > transform.position.y)
             pointUnderWater = true;
-        else
-        {
+        else        
             pointUnderWater = false;
-        }
-
-
-        Vector3 point = transform.position;
+        
+        
         if (pointUnderWater && inOut == pointUnderWater/* && Vector3.Distance(lastPoint, point) > 0.1f*/)
         {
-            Vector3 actualPoint = waves.GetPoint(point);
+            Vector3 actualPoint = waves.GetPoint(transform.position);
             if (actualPoint != lastPoint)
             {
                 float actualForce = 0f;
@@ -71,11 +56,8 @@ public class WaterRipples : MonoBehaviour
                     actualForce = maxForce;
                 if (actualForce < -maxForce)
                     actualForce = -maxForce;
-                //point += hit.normal * forceOffset;
-                waves.AddDeformingForce(point, actualForce);
-                done = true;
-
-                contador = 0f;
+                
+                waves.AddDeformingForce(transform.position, actualForce);                                
                 lastPoint = actualPoint;
             }
 
@@ -83,20 +65,17 @@ public class WaterRipples : MonoBehaviour
 
         if (inOut != pointUnderWater)
         {
-            Vector3 actualPoint = waves.GetPoint(point);
-            waves.lastX = -1;
-            waves.lastY = -1;
+            Vector3 actualPoint = waves.GetPoint(transform.position);            
             inOut = pointUnderWater;
             float actualForce = 0f;
             if (WaterLinePoint.y - transform.position.y < distanceToSurface)
                 actualForce = force * speed * Time.deltaTime * 100f;
-            point = transform.position;
+            
             if (actualForce > maxForce)
                 actualForce = maxForce;
-            //point += hit.normal * forceOffset;
-            waves.AddDeformingForce(point, actualForce);
-            done = true;
-            contador = 0f;
+            
+            waves.AddDeformingForce(transform.position, actualForce);
+            inOut = pointUnderWater;
             lastPoint = actualPoint;
         }
 
