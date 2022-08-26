@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToSurface: 3
-  force: -0.02
+  force: -0.03
   maxForce: 0.1
 --- !u!1 &1871118626
 GameObject:
